@@ -6,12 +6,12 @@ export const openDB = () => {
     return new Promise<IDBDatabase>((resolve, reject) => {
         const request = indexedDB.open(DB_NAME, 2); // Ensure correct DB name
 
-        request.onupgradeneeded = (event) => {
-            const db = request.result;
-            if (!db.objectStoreNames.contains(STORE_NAME)) {
-                db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
-            }
-        };
+        // request.onupgradeneeded = (event) => {
+        //     const db = request.result;
+        //     if (!db.objectStoreNames.contains(STORE_NAME)) {
+        //         db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
+        //     }
+        // };
 
         request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
@@ -22,12 +22,12 @@ export const saveQuizResult = async (score: number, totalQuestions: number) => {
   return new Promise<void>((resolve, reject) => {
     const request = indexedDB.open("quizDB", 2); // Ensure the latest version
 
-    request.onupgradeneeded = (event) => {
-      const db = (event.target as IDBOpenDBRequest).result;
-      if (!db.objectStoreNames.contains("quizResults")) {
-        db.createObjectStore("quizResults", { keyPath: "id", autoIncrement: true });
-      }
-    };
+    // request.onupgradeneeded = (event) => {
+    //   const db = (event.target as IDBOpenDBRequest).result;
+    //   if (!db.objectStoreNames.contains("quizResults")) {
+    //     db.createObjectStore("quizResults", { keyPath: "id", autoIncrement: true });
+    //   }
+    // };
 
     request.onsuccess = () => {
       const db = request.result;
