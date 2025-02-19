@@ -1,6 +1,6 @@
 
 const DB_NAME = "quizDB";
-const STORE_NAME = "quizResults";
+// const STORE_NAME = "quizResults";
 
 export const openDB = () => {
     return new Promise<IDBDatabase>((resolve, reject) => {
